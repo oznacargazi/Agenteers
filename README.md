@@ -1,5 +1,4 @@
-cat > README.md << 'EOF'
-# Awesome .NET Claude Agents 🚀
+# Agenteers - .NET Claude Agents 🚀
 
 **Supercharge Claude Code with specialized .NET agents** that work together to build complete Blazor applications, optimize Entity Framework queries, and architect scalable ASP.NET Core backends with expert-level knowledge.
 
