@@ -1,92 +1,111 @@
-# Agenteers - .NET Claude Agents 🚀
+# Agenteers - .NET Claude Agents 🧑‍💻
 
-**Supercharge Claude Code with specialized .NET agents** that work together to build complete Blazor applications, optimize Entity Framework queries, and architect scalable ASP.NET Core backends with expert-level knowledge.
+> Specialized AI agents that bring expert .NET knowledge to Claude Code
 
-## 🚀 Quick Start (3 Minutes)
+Transform your .NET development workflow with four specialized agents designed specifically for Blazor, ASP.NET Core, and Entity Framework projects. Each agent provides deep expertise and seamlessly coordinates with others to deliver complete solutions.
 
-### Prerequisites
-- **Claude Code CLI** installed and authenticated
-- **Claude subscription** recommended for complex workflows
-- Active .NET project directory
+**Inspired by and built upon the excellent work from [awesome-claude-agents](https://github.com/vijaythecoder/awesome-claude-agents) by @vijaythecoder**
 
-### 1. Install the Agents
+## 🎯 What Makes Agenteers Different
+
+Unlike general-purpose coding assistants, these agents are laser-focused on the .NET ecosystem:
+
+- **Deep .NET Knowledge**: Each agent specializes in specific Microsoft technologies
+- **Project Context Aware**: Automatically adapts to your existing .NET project structure  
+- **Real Coordination**: Agents hand off work to each other intelligently
+- **Production Ready**: Follows Microsoft's latest best practices and patterns
+
+## 🛠 Your .NET Expert Team
+
+| Agent | Specialty | When to Use |
+|-------|-----------|-------------|
+| **blazor-component-architect** | Interactive UI Components | Building Blazor Server/WASM apps, component libraries |
+| **aspnet-core-backend-expert** | Business Logic & Services | Clean architecture, dependency injection, background jobs |
+| **aspnet-core-api-developer** | Web APIs & Integration | REST APIs, authentication, OpenAPI documentation |
+| **entity-framework-expert** | Database & Performance | EF Core optimization, complex queries, migrations |
+
+## ⚡ Getting Started
+
+**Step 1: Get the agents**
 ```bash
-git clone https://github.com/YOUR_USERNAME/awesome-dotnet-claude-agents.git
-Option A: Symlink (Recommended - auto-updates)
-macOS/Linux:
-bashln -sf "$(pwd)/awesome-dotnet-claude-agents" ~/.claude/awesome-dotnet-claude-agents
-Windows (PowerShell):
-powershellcmd /c mklink /D "$env:USERPROFILE\.claude\awesome-dotnet-claude-agents" "$(Get-Location)\awesome-dotnet-claude-agents"
-Option B: Copy (Static - no auto-updates)
-bashcp -r awesome-dotnet-claude-agents ~/.claude/
-2. Verify Installation
-bashclaude /agents
-# Should show your .NET agents
-3. Initialize Your .NET Project
-Navigate to your .NET project directory and run:
-bashclaude "use @agent-team-configurator and set up my .NET development team"
-4. Start Building
-bashclaude "use @agent-blazor-component-architect and create an interactive product catalog"
-👥 Meet Your .NET Development Team
-🔥 Blazor Specialists (1 agent)
+git clone https://github.com/oznacargazi/Agenteers.git
+cd Agenteers
+```
 
-Blazor Component Architect - Modern Blazor patterns, Server/WebAssembly, real-time components
+**Step 2: Link to Claude Code**
+```bash
+# Create symlink (updates automatically)
+ln -sf "$(pwd)" ~/.claude/agenteers
 
-⚙️ ASP.NET Core Experts (2 agents)
+# Or copy once (static)
+cp -r . ~/.claude/agenteers
+```
 
-Backend Expert - Clean architecture, dependency injection, background services
-API Developer - RESTful APIs, authentication, OpenAPI documentation
+**Step 3: Try it out**
+```bash
+# Navigate to your .NET project
+cd /path/to/your/dotnet/project
 
-🗄️ Database Specialists (1 agent)
+# Let the agents analyze and help
+claude "use @agent-blazor-component-architect to improve my product list component"
+```
 
-Entity Framework Expert - EF Core optimization, complex queries, migrations
+## 💡 Real-World Examples
 
-Total: 4 specialized .NET agents working together!
-🎯 Why This .NET Team Rocks
+**Building a Feature End-to-End:**
+```bash
+claude "I need a real-time inventory system for my e-commerce site"
+# → Agents coordinate: EF Expert → Backend Expert → API Developer → Blazor Architect
+```
 
-Modern .NET 8+ Patterns: Latest C# features, minimal APIs, and performance optimizations
-Blazor Mastery: Server, WebAssembly, and hybrid rendering strategies
-EF Core Excellence: Query optimization, migrations, and database performance
-Real Collaboration: Agents coordinate seamlessly with structured handoffs
-Project-Aware: Adapts to your existing .NET codebase and conventions
+**Optimizing Performance:**
+```bash
+claude "My dashboard loads slowly, help optimize it"
+# → EF Expert analyzes queries, Blazor Architect improves rendering
+```
 
-📈 The .NET Advantage
+**Adding Authentication:**
+```bash
+claude "Add JWT auth to my existing API"
+# → API Developer handles auth, Backend Expert updates services accordingly
+```
 
-Ship Blazor Apps Faster - Interactive components in minutes
-Optimize Database Queries - EF Core performance tuning
-Build Robust APIs - RESTful services with proper authentication
-Scale with Confidence - Architecture designed for enterprise needs
+## 🏗 Architecture Philosophy
 
-🔥 Example Workflows
-bash# Build a complete e-commerce feature
-claude "Create a product management system with real-time inventory updates"
+These agents follow modern .NET principles:
 
-# Optimize existing performance issues  
-claude "My EF Core queries are slow, help optimize them"
+- **Clean Architecture**: Separation of concerns, dependency inversion
+- **Domain-Driven Design**: Rich domain models, bounded contexts  
+- **Performance First**: Async/await, memory efficiency, query optimization
+- **Security by Default**: Authentication, authorization, input validation
+- **Testability**: Dependency injection, mocking, unit test patterns
 
-# Add authentication to existing API
-claude "Add JWT authentication with role-based authorization"
+## 📖 Documentation
 
-# Create responsive Blazor components
-claude "Build a dashboard with real-time charts and data grids"
-📚 Learn More
+- [Agent Usage Guide](docs/usage-guide.md) - How to get the most from each agent
+- [.NET Patterns](docs/dotnet-patterns.md) - Best practices the agents follow
+- [Troubleshooting](docs/troubleshooting.md) - Common issues and solutions
 
-Creating Custom .NET Agents
-.NET Best Practices
-Blazor Patterns Guide
+## 🤝 Contributing
 
-💬 Join The .NET Community
+Found a bug? Have an idea for a new .NET agent? Contributions welcome!
 
-⭐ Star this repo to show support
-🐛 Report issues
-💡 Share ideas
-🎉 Success stories
+- **Issues**: [Report problems](https://github.com/oznacargazi/Agenteers/issues)
+- **Discussions**: [Share ideas](https://github.com/oznacargazi/Agenteers/discussions)
+- **Pull Requests**: Follow our [contribution guide](CONTRIBUTING.md)
 
-📄 License
-MIT License - Use freely in your .NET projects!
+## 🙏 Acknowledgments
 
-<p align="center">
-  <strong>Transform Claude Code into a .NET development team that ships production-ready applications</strong><br>
-  <em>Built for .NET 8+, Blazor, and modern C# development</em>
-</p>
+This project builds upon the excellent foundation laid by:
+- **[awesome-claude-agents](https://github.com/vijaythecoder/awesome-claude-agents)** - The original agent orchestration system
+- **Microsoft .NET Team** - For the amazing .NET ecosystem
+- **Claude Code Community** - For pushing the boundaries of AI-assisted development
+
+## 📄 License
+
+MIT License - Build amazing .NET apps with these agents!
+
+---
+
+**Ready to supercharge your .NET development?** ⭐ Star this repo and start building with your new AI team!
 
