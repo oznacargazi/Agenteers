@@ -1,199 +1,194 @@
-This file provides guidance to Claude Code when working with .NET projects using these specialized agents.
+# CLAUDE.md - Agenteers Project Configuration
+
+This file configures Claude Code to work with the Agenteers specialized .NET agent system.
 
 ## Project Overview
 
-This is the Awesome .NET Claude Agents repository - a collection of specialized AI agents for .NET, Blazor, ASP.NET Core, and Entity Framework development. The agents work together as a development team, with each agent having specific .NET expertise and delegation patterns.
+Agenteers is a comprehensive multi-agent orchestration system specialized for .NET 8, ASP.NET Core, and Blazor development. The system leverages Clean Architecture principles and Microsoft best practices through coordinated specialist agents.
 
-## Working with .NET Agents
+## Technology Stack
 
-When creating or modifying .NET agents:
-1. Agents are Markdown files with YAML frontmatter
-2. Most agents should omit the `tools` field to inherit all available tools
-3. Use XML-style examples in descriptions for intelligent invocation
-4. Agents return structured findings for main agent coordination
+- **Backend**: .NET 8, ASP.NET Core, Clean Architecture
+- **Frontend**: Blazor Server & WebAssembly
+- **Database**: Entity Framework Core, SQL Server/PostgreSQL
+- **Authentication**: ASP.NET Core Identity, JWT
+- **Patterns**: Domain-Driven Design, CQRS, Repository Pattern
 
-## .NET Agent Routing Protocol
+## Agent Routing Protocol
 
-**When handling .NET development tasks, you MUST:**
+### CRITICAL: Orchestration Rules
 
-1. **ALWAYS start with tech-lead-orchestrator** for any multi-step .NET task
-2. **FOLLOW the agent routing map** returned by tech-lead EXACTLY
-3. **USE ONLY the agents** explicitly recommended by tech-lead
-4. **NEVER select agents independently** - tech-lead knows which .NET agents exist
+1. **Multi-step tasks** MUST start with `@agent-dotnet-orchestrator`
+2. **Single-domain tasks** can use specialized agents directly
+3. **Agents cannot invoke each other** - main Claude coordinates
+4. **Structured returns** enable inter-agent communication
 
-### .NET-Specific Agent Selection
-CORRECT FLOW for .NET:
-User Request → Tech-Lead Analysis → .NET Agent Routing Map → Execute with Listed Agents
-INCORRECT FLOW:
-User Request → Main Agent Guesses → Wrong Agent Selected → Task Fails
+### Task-to-Agent Mapping
 
-### Example .NET Agent Coordination
+| Task Category | Primary Agent | Fallback Agent |
+|--------------|--------------|----------------|
+| **Architecture Design** | dotnet-backend-architect | - |
+| **Database Modeling** | ef-core-entity-modeler | dotnet-backend-architect |
+| **API Development** | aspnet-core-api-developer | dotnet-backend-architect |
+| **Blazor UI** | blazor-component-architect | razor-page-builder |
+| **Authentication** | identity-auth-specialist | aspnet-core-api-developer |
+| **Orchestration** | dotnet-orchestrator | - |
+| **Code Review** | code-reviewer | - |
+| **Testing** | test-specialist | - |
 
+## Task JSON Format
+
+All agents accept standardized JSON task payloads:
+
+```json
+{
+  "task": "string - task type",
+  "goal": "string - specific objective",
+  "context": {
+    "project_type": "blazor_server | blazor_wasm | web_api",
+    "existing_structure": "description",
+    "constraints": ["array of constraints"]
+  },
+  "requirements": {
+    "functional": ["array of features"],
+    "non_functional": ["performance", "security", "scalability"]
+  },
+  "input_files": ["array of relevant file paths"],
+  "output_format": "code | documentation | configuration"
+}
+```
+
+## Agent Communication Protocol
+
+### Input Structure
+```json
+{
+  "from_agent": "previous_agent_name",
+  "phase": "current_phase",
+  "previous_output": {
+    "artifacts": ["created files/classes"],
+    "decisions": ["architectural choices"],
+    "constraints": ["identified limitations"]
+  },
+  "next_task": "specific work needed"
+}
+```
+
+### Output Structure
+```json
+{
+  "agent": "current_agent_name",
+  "phase_complete": "phase_name",
+  "artifacts": {
+    "files_created": ["list"],
+    "files_modified": ["list"],
+    "code_snippets": {}
+  },
+  "decisions": ["choices made"],
+  "handoff": {
+    "next_agent": "agent_name",
+    "required_input": {},
+    "dependencies": []
+  }
+}
+```
+
+## Development Workflow
+
+### 1. Initialize Project
 ```bash
-# User: "Build a Blazor e-commerce app with real-time features"
+claude "use @agent-team-configurator to analyze my .NET project"
+```
 
-# Main Claude Agent:
-# 1. First, use tech-lead-orchestrator to analyze and get routing
-# 2. Tech-lead returns: Use blazor-component-architect → aspnet-core-backend-expert → entity-framework-expert
-# 3. Execute in specified order with proper handoffs
-.NET Technology Focus
-
-Blazor: Server, WebAssembly, and hybrid applications
-ASP.NET Core: Web APIs, middleware, and backend services
-Entity Framework Core: Database modeling and query optimization
-Modern C#: Latest language features and patterns
-.NET 8+: Current framework capabilities and performance features
-
-Key .NET Concepts
-Agent Architecture for .NET
-The .NET agents follow Microsoft's recommended patterns:
-
-Clean Architecture principles
-Dependency injection patterns
-Async/await best practices
-Performance optimization techniques
-Security best practices
-
-.NET Agent Communication Protocol
-Since sub-agents cannot directly communicate:
-
-Structured Returns: Each .NET agent returns findings in parseable format
-Context Passing: Main agent extracts relevant information
-Sequential Coordination: Main agent manages the execution flow
-Technology Handoffs: Agents specify what the next .NET specialist needs
-
-Complete .NET Example
-User Request:
-"Help me build a product catalog with real-time inventory updates"
-Step 1: Tech-Lead Analysis
-Main Agent: "I'll use the tech-lead-orchestrator to analyze this .NET request."
-[Invokes tech-lead-orchestrator]
-Step 2: Tech-Lead Returns .NET Routing Map
-## .NET Agent Routing Map
-
-Task 1: Analyze .NET Project Structure
-- PRIMARY AGENT: project-analyst
-- REASON: Need to identify .NET version and architecture
-
-Task 2: Design Blazor Components  
-- PRIMARY AGENT: blazor-component-architect
-- REASON: Interactive product catalog UI needed
-
-Task 3: Build Backend Services
-- PRIMARY AGENT: aspnet-core-backend-expert
-- REASON: Business logic and real-time processing
-
-Task 4: Optimize Database Queries
-- PRIMARY AGENT: entity-framework-expert
-- REASON: Product catalog requires efficient data access
-
-Task 5: Create API Endpoints
-- PRIMARY AGENT: aspnet-core-api-developer
-- REASON: API layer for Blazor components
-
-## Available .NET Agents for This Project
-- blazor-component-architect
-- aspnet-core-backend-expert
-- entity-framework-expert
-- aspnet-core-api-developer
-
-## CRITICAL INSTRUCTION
-Use ONLY the .NET agents listed above. Do NOT use Laravel, Django, or other framework agents.
-Step 3: Main Agent Executes .NET Plan
-Main Agent: "Based on the tech-lead's .NET routing, I'll coordinate the implementation:"
-
-1. ✓ Using blazor-component-architect for interactive UI
-2. ✓ Using aspnet-core-backend-expert for business services
-3. ✓ Using entity-framework-expert for data optimization
-4. ✓ Using aspnet-core-api-developer for API layer
-
-[Executes each step with the EXACT .NET agents specified]
-Critical .NET Reminders
-
-ALWAYS use tech-lead-orchestrator for multi-step .NET tasks
-FOLLOW the .NET agent routing map exactly - do not improvise
-USE deep reasoning when coordinating the recommended .NET agents
-TRUST the tech-lead's expertise in .NET agent selection
-FOCUS on modern .NET patterns and best practices
-EOF
-
-
-## **Step 5: Create Additional Files**
-
+### 2. Architecture Design
 ```bash
-# Create CONTRIBUTING.md
-cat > CONTRIBUTING.md << 'EOF'
-# Contributing to Awesome .NET Claude Agents
+claude "use @agent-dotnet-backend-architect to design [feature]"
+```
 
-Thank you for your interest in contributing to our collection of specialized .NET Claude agents!
+### 3. Full Feature Development
+```bash
+claude "use @agent-dotnet-orchestrator to build [complete feature]"
+```
 
-## 🎯 Our Mission
+### 4. Code Review
+```bash
+claude "use @agent-code-reviewer to review the implementation"
+```
 
-Build the most comprehensive, high-quality collection of .NET-focused Claude sub-agents that enhance productivity for Blazor, ASP.NET Core, and Entity Framework development.
+## Best Practices
 
-## 📋 Quick Contribution Guide
+### Clean Architecture Structure
+```
+src/
+├── MyApp.Domain/           # Entities, Value Objects, Interfaces
+├── MyApp.Application/      # Use Cases, DTOs, Application Services
+├── MyApp.Infrastructure/   # EF Core, External Services
+├── MyApp.WebApi/          # Controllers, Middleware
+└── MyApp.BlazorUI/        # Components, Pages
+```
 
-### Creating New .NET Agents
-1. Follow the agent template in the existing files
-2. Focus on specific .NET technologies or patterns
-3. Include XML-style examples in the description
-4. Add delegation patterns to other .NET agents
-5. Test with real .NET projects
+### Naming Conventions
+- **Entities**: PascalCase singular (User, Order)
+- **Tables**: PascalCase plural (Users, Orders)
+- **Interfaces**: I prefix (IUserService)
+- **Async methods**: Async suffix (GetUserAsync)
 
-### Improving Existing Agents
-- Add new .NET 8+ features and patterns
-- Improve delegation and coordination
-- Add more implementation examples
-- Update documentation references
+### Code Standards
+- Use dependency injection everywhere
+- Implement repository pattern for data access
+- Apply SOLID principles
+- Write unit tests for business logic
+- Use FluentValidation for complex validation
+- Implement global error handling
 
-## 🔧 .NET Agent Standards
+## Performance Guidelines
 
-- **Always fetch latest Microsoft documentation**
-- **Use current C# language features**
-- **Follow Microsoft's recommended patterns**
-- **Include structured return formats**
-- **Test with actual .NET projects**
+### Token Optimization
+- Agents return structured JSON, not full code files
+- Use references to existing code when possible
+- Batch related operations in single agent calls
+- Reuse previous agent outputs
 
-## 📞 Getting Help
+### Caching Strategy
+- Cache agent outputs for similar tasks
+- Store architectural decisions for consistency
+- Maintain component library for reuse
 
-- **Issues**: Report bugs via GitHub Issues
-- **Discussions**: Use GitHub Discussions for questions
-- **Ideas**: Share suggestions for new .NET agents
+## Security Considerations
+
+- Always validate input at API boundaries
+- Use parameterized queries (EF Core handles this)
+- Implement authorization policies
+- Sanitize user-generated content
+- Use HTTPS everywhere
+- Store secrets in configuration, not code
+
+## AI Team Configuration (autogenerated by team-configurator, 2024-01-31)
+
+**Important: YOU MUST USE subagents when available for the task.**
+
+### Detected Stack
+- .NET 8.0
+- ASP.NET Core
+- Blazor Server/WebAssembly
+- Entity Framework Core
+- SQL Server/PostgreSQL
+
+### Agent Assignments
+
+| Task | Agent | Notes |
+|------|-------|-------|
+| Architecture Design | dotnet-backend-architect | Clean Architecture, DDD |
+| Database Schema | ef-core-entity-modeler | Code First, Migrations |
+| API Development | aspnet-core-api-developer | REST, GraphQL |
+| Blazor Components | blazor-component-architect | Server & WASM |
+| Razor Pages | razor-page-builder | MVC Views |
+| Authentication | identity-auth-specialist | Identity, JWT |
+| Multi-step Features | dotnet-orchestrator | Coordinates all agents |
+| Code Review | code-reviewer | Security, Performance |
+| Testing | test-specialist | Unit, Integration |
+| Documentation | documentation-specialist | API docs, README |
 
 ---
 
-Help us make .NET development with Claude even more powerful! 🚀
-EOF
-
-# Create .gitignore
-cat > .gitignore << 'EOF'
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Temporary files
-*.tmp
-*.temp
-.tmp/
-
-# Logs
-*.log
-
-# .NET specific
-bin/
-obj/
-*.user
-*.suo
-.vs/
+*Configuration updated automatically. Do not modify the AI Team Configuration section manually.*
